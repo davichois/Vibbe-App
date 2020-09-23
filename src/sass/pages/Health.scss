@@ -1,0 +1,116 @@
+.sintomas {
+  &__title {
+    font-family: var(--font-title);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--color-standar);
+    margin-left: 6px;
+  }
+
+  &__list {
+    width: 100%;
+    height: auto;
+    display: flex;
+    list-style: none;
+    padding: 10px 0 3px 0;
+    overflow-y: scroll;
+    user-select: none;
+
+    li {
+      width: auto;
+      display: block;
+      text-align: center;
+      padding: 0 15px;
+      user-select: none;
+
+      img {
+        width: 72px;
+        background-color: rgba(135, 91, 180, 0.4);
+        border-radius: 50%;
+        padding: 7px;
+        box-sizing: border-box;
+      }
+      p {
+        font-family: var(--font-subtitle);
+        font-size: 15px;
+        font-weight: normal;
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  // Scroll
+  &__list::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &__list::-webkit-scrollbar-button:increment,
+  &__list::-webkit-scrollbar-button {
+    display: none;
+  }
+  &__list::-webkit-scrollbar:horizontal {
+    height: 1px;
+  }
+
+  &__list::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+    visibility: hidden;
+  }
+
+  &__list::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}
+
+.prevencion {
+  &__title {
+    @extend .sintomas__title;
+    // #9f6fd0
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+    .item_prev {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto;
+      grid-column-gap: 6px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        padding: 10px;
+      }
+      p {
+        display: flex;
+        align-items: center;
+        font-family: var(--font-subtitle);
+        font-size: 15px;
+        font-weight: normal;
+        color: var(--color-standar);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sintomas__title,
+  .prevencion__title {
+    font-size: 22px;
+  }
+
+  .sintomas__list li p {
+    font-size: 17px;
+  }
+
+  .prevencion__content .item_prev p {
+    font-size: 17px;
+  }
+}

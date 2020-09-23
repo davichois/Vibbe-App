@@ -1,0 +1,30 @@
+.modalContact {
+  font-family: var(--font-subtitle);
+  h1 {
+    color: var(--color-primary-ligth);
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 0.5em;
+  }
+  p {
+    color: var(--color-standar);
+    font-size: 1em;
+  }
+  ul {
+    list-style: none;
+    padding-top: 0.6em;
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      img {
+        width: 25px;
+      }
+      span {
+        padding-left: 0.3em;
+        color: var(--color-standar);
+        font-size: 1em;
+      }
+    }
+  }
+}

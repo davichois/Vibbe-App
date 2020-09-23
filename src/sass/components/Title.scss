@@ -1,0 +1,39 @@
+.titleInfo {
+  width: inherit;
+  height: auto;
+  display: flex;
+  img {
+    width: 58px;
+    height: 58px;
+  }
+  div {
+    margin-left: 0.5em;
+    span {
+      display: block;
+      color: var(--color-primary);
+      font-family: var(--font-subtitle);
+      font-weight: 500;
+    }
+    span:first-child {
+      font-size: 18px;
+    }
+    span:last-child {
+      font-size: 22px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .titleInfo img {
+    width: 62px;
+    height: 62px;
+  }
+
+  .titleInfo div span:first-child {
+    font-size: 20px;
+  }
+
+  .titleInfo div span:last-child {
+    font-size: 24px;
+  }
+}

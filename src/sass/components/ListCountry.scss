@@ -1,0 +1,70 @@
+.ListCountry {
+  a {
+    width: 100%;
+    height: 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    margin-bottom: 4px;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    text-decoration: none;
+
+    img {
+      width: 30px;
+      height: 20px;
+    }
+
+    p {
+      padding: 0 8px;
+      color: var(--color-standar);
+      font-family: var(--font-subtitle);
+      font-size: 14px;
+    }
+
+    span {
+      color: var(--color-modu3);
+      font-family: var(--font-subtitle);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  a:active {
+    background-color: var(--color-dark-active);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .ListCountry a {
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    margin-bottom: 4px;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  .ListCountry a img {
+    width: 35px;
+    height: 25px;
+  }
+
+  .ListCountry a p {
+    padding: 0 10px;
+    font-size: 16px;
+  }
+
+  .ListCountry a span {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,69 @@
+.card {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "info-title info-title" "info-img info-count";
+  padding: 0.1em 0.8em;
+  margin: 0.3em 6px 10px 0;
+  box-sizing: border-box;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-left: 2px solid var(--color-third);
+  font-family: var(--font-subtitle);
+  &__title {
+    font-size: 16px;
+    color: var(--color-third);
+    grid-area: info-title;
+    font-family: var(--font-subtitle2);
+    padding-bottom: 3px;
+  }
+  &__img {
+    grid-area: info-img;
+    padding-top: 3px;
+    color: var(--color-third);
+  }
+  &__count {
+    grid-area: info-count;
+    text-align: right;
+    p {
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--color-parrafo);
+    }
+    span {
+      position: relative;
+      top: -3px;
+      font-size: 14px;
+      color: var(--color-third);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding: 2px 20px;
+  }
+
+  .icon-team:before {
+    font-size: 18px;
+  }
+
+  .card__title {
+    font-size: 18px;
+    color: var(--color-third);
+    grid-area: info-title;
+    font-family: var(--font-subtitle2);
+    padding-bottom: 3px;
+  }
+
+  .card__count p {
+    font-size: 21px;
+  }
+
+  .card__count span {
+    top: -3px;
+    font-size: 16px;
+  }
+}

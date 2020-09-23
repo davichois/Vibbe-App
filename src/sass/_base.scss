@@ -1,0 +1,173 @@
+// Variables
+:root {
+  // Colores
+  --color-primary: #533672;
+  --color-secondary: #747474;
+  --color-third: #6e6e6e;
+  --color-fourth: #efefef;
+
+  --color-primary-ligth: #7b376a;
+
+  --color-parrafo: #504e4e;
+  --color-modu1: #6496d4;
+  --color-modu2: #e38b4f;
+  --color-modu3: #e60000;
+  --color-modu4: #70a800;
+  --color-ligth: #ffffff;
+  --color-fondo: rgba(83, 54, 114, 0.08);
+  --color-ligth-active: rgba(255, 255, 255, 0.1);
+  --color-dark-active: rgba(0, 0, 0, 0.05);
+  --color-lineal: rgba(0, 0, 0, 0.2);
+  --color-standar: #1f1f1f;
+
+  // Fuentes
+  --font-title: "Ubuntu", sans-serif;
+  --font-subtitle: "Roboto", sans-serif;
+  --font-subtitle2: "Roboto Condensed", sans-serif;
+
+  // Tamaño
+  --font-main: 16px;
+}
+// ---------------------------------------
+
+// Clases globales
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: var(--color-fondo);
+  font-family: var(--font-title);
+  font-size: var(--font-main);
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  padding: 0.625em;
+  padding-bottom: 3.5em;
+  box-sizing: border-box;
+}
+
+#menu {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 15;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  &:active {
+    background-color: transparent;
+  }
+}
+
+.loader__container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  width: 100%;
+  height: calc(100vh - 56px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+}
+
+.style-box {
+  width: 100%;
+  height: auto;
+  padding: 0.7em 0.5em;
+  margin-bottom: 0.5em;
+  background-color: var(--color-ligth);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.w-active {
+  color: var(--color-primary) !important;
+  font-weight: 500 !important;
+}
+
+@media screen and (min-width: 768px) {
+  .style-box {
+    padding: 1.5em 1em;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 650px;
+    padding-top: 4.8em;
+    padding-bottom: 0;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .w-active {
+    color: var(--color-primary-ligth) !important;
+    font-weight: 500 !important;
+    border-bottom: 3px solid var(--color-primary-ligth);
+  }
+}
+
+.cases {
+  color: var(--color-modu1) !important;
+  border-color: var(--color-modu1) !important;
+}
+
+.active {
+  color: var(--color-modu2) !important;
+  border-color: var(--color-modu2) !important;
+}
+
+.deaths {
+  color: var(--color-modu3) !important;
+  border-color: var(--color-modu3) !important;
+}
+
+.recovered {
+  color: var(--color-modu4) !important;
+  border-color: var(--color-modu4) !important;
+}
+
+.blockContainer {
+  display: none;
+}
+
+.btn {
+  border: 1px solid var(--color-secondary);
+  border-radius: 6px;
+  color: var(--color-standar);
+  font-family: var(--font-subtitle);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 34px;
+  box-sizing: border-box;
+  padding: 0 18px;
+  margin: 1px;
+  outline: none;
+  user-select: none;
+
+  &-primary {
+    background-color: var(--color-primary-ligth);
+    color: var(--color-ligth);
+    border: 0;
+  }
+  &-danger {
+    background-color: var(--color-fourth);
+  }
+}

@@ -1,0 +1,22 @@
+.Header {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-subtitle);
+  padding: 0.7em 1em;
+  img {
+    width: 35px;
+    height: 24px;
+  }
+  h1 {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 0.3em;
+    color: var(--color-standar);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Header {
+    padding: 1.2em 1.1em;
+  }
+}

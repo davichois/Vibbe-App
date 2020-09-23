@@ -1,0 +1,119 @@
+.modalQualify {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  &__description {
+    h1 {
+      font-size: 22px;
+      font-family: var(--font-subtitle);
+      font-weight: 500;
+      color: var(--color-primary-ligth);
+      margin-bottom: 0.5em;
+    }
+    p {
+      font-size: 1em;
+      font-family: var(--font-subtitle);
+      color: var(--color-standar);
+    }
+    margin-bottom: 0.8em;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "comments" "points" "buttons";
+
+    .form {
+      &__points {
+        width: 100%;
+        margin: 0.8em 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        padding: 0 4px;
+        position: relative;
+        grid-area: points;
+        box-sizing: border-box;
+        .points_num {
+          display: flex;
+          flex-direction: row-reverse;
+
+          .input_points {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            visibility: hidden;
+          }
+          .label_points {
+            font-size: 1.5em;
+            padding-right: 6px;
+            color: var(--color-secondary);
+            user-select: none;
+          }
+          .input_points:checked ~ .label_points {
+            color: var(--color-primary-ligth);
+          }
+        }
+        .points_value {
+          font-family: var(--font-subtitle);
+          font-size: 14px;
+          color: var(--color-standar);
+          margin-left: 5px;
+        }
+      }
+      &__comments {
+        grid-area: comments;
+        textarea {
+          width: 100%;
+          height: 90px;
+          font-family: var(--font-subtitle);
+          font-size: 15px;
+          color: var(--color-standar);
+          box-sizing: border-box;
+          border: 1px solid var(--color-secondary);
+          border-radius: 3px;
+          padding: 4px 6px;
+          resize: none;
+          outline: none;
+        }
+      }
+      &__buttons {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 3px;
+        grid-area: buttons;
+      }
+    }
+  }
+  &__checked {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-modu4);
+    i {
+      font-size: 2.3em;
+      font-weight: 500;
+    }
+    h1 {
+      font-family: var(--font-subtitle);
+      font-weight: 500;
+      font-size: 21px;
+      padding-top: 0.5em;
+    }
+  }
+  .Loader_container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}

@@ -1,0 +1,53 @@
+.Logo {
+  width: 120px;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+
+  &_img {
+    max-width: 60px;
+  }
+
+  &_h1 {
+    color: #7b376a;
+    position: relative;
+    left: -0.6em;
+    font-style: italic;
+  }
+
+  &_dev {
+    position: relative;
+    left: -16px;
+    color: var(--color-third);
+    font-family: var(--font-title);
+    font-weight: normal;
+    font-size: 2em;
+    font-style: italic;
+    letter-spacing: -1px;
+    display: none;
+  }
+  &__active {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Logo {
+    width: 115px;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+
+    &_img {
+      max-width: 45px;
+    }
+
+    &_h1 {
+      left: -0.56em;
+      font-style: italic;
+      font-size: 24px;
+    }
+  }
+}
