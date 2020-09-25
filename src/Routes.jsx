@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Axios from "axios";
 import { setToken, getToken, deleteToken } from "./helpers/auth";
 import { getAdminBtn, setAdminBtn } from "./helpers/admin_active";
 
@@ -11,7 +12,6 @@ import About from "./views/About";
 import Global from "./views/Global";
 import Countries from "./views/Countries";
 import Login from "./views/Login";
-import Axios from "axios";
 const Health = lazy(() => import("./views/Health"));
 const Development = lazy(() => import("./views/Development"));
 const Departamentos = lazy(() => import("./views/Departamentos"));
@@ -48,7 +48,7 @@ const RoutesAdmin = () => (
   </>
 );
 
-const RoutesPublic = ({ clickCount, actAdmin, loginAdmin }) => (
+const RoutesPublic = ({ ipCountry, clickCount, actAdmin, loginAdmin }) => (
   <>
     <Suspense
       fallback={
@@ -59,7 +59,11 @@ const RoutesPublic = ({ clickCount, actAdmin, loginAdmin }) => (
     >
       <Switch>
         <Route exact path="/" component={Global} />
-        <Route exact path="/countries" component={Countries} />
+        {/* <Route
+          exact
+          path="/countries"
+          render={(props) => <Countries {...props} ipCountry={ipCountry} />}
+        /> */}
         <Route path="/health" component={Health} />
         <Route
           exact
@@ -69,7 +73,13 @@ const RoutesPublic = ({ clickCount, actAdmin, loginAdmin }) => (
           )}
         />
         <Route exact path="/development" component={Development} />
-        <Route exact path="/countries/:countryId" component={CountryDetails} />
+        <Route
+          exact
+          path="/countries/:countryId"
+          render={(props) => (
+            <CountryDetails {...props} ipCountry={ipCountry} />
+          )}
+        />
         <Route
           exact
           path="/login"
@@ -85,7 +95,7 @@ const Routes = () => {
   const [admin, setAdmin] = useState(null);
   const [cargandoAdmin, setCargandoAdmin] = useState(true);
   const [actAdmin, setActAdmin] = useState(false);
-  // const [ipCountry, setIpCountry] = useState(false);
+  const [ipCountry, setIpCountry] = useState("PE");
 
   // activacion del btn login
   let numClick = 0;
@@ -128,6 +138,16 @@ const Routes = () => {
   };
 
   useEffect(() => {
+    async function fetchIP() {
+      const { data } = await Axios.get("http://localhost:3000/geo");
+      console.log(data["info De Geo"].country);
+      setIpCountry(data["info De Geo"].country);
+    }
+
+    fetchIP();
+  }, []);
+
+  useEffect(() => {
     if (!getToken()) {
       setCargandoAdmin(false);
       return;
@@ -159,9 +179,14 @@ const Routes = () => {
             loginAdmin={loginAdmin}
             actAdmin={actAdmin}
             clickCount={clickCount}
+            ipCountry={ipCountry}
           />
         )}
-        <Navbar admin={admin} handleLogout={handleLogout} />
+        <Navbar
+          admin={admin}
+          handleLogout={handleLogout}
+          ipCountry={ipCountry}
+        />
       </>
     </Router>
   );

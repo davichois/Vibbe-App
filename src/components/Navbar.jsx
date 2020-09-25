@@ -43,7 +43,7 @@ const NavAdmin = ({ handleLogout }) => {
   );
 };
 
-const NavPublic = () => {
+const NavPublic = ({ ipCountry }) => {
   return (
     <>
       <NavLink exact to="/" activeClassName="w-active" className="navbar__item">
@@ -52,7 +52,7 @@ const NavPublic = () => {
       </NavLink>
       <NavLink
         exact
-        to="/countries"
+        to={`/countries/${ipCountry}`}
         activeClassName="w-active"
         className="navbar__item"
       >
@@ -81,13 +81,17 @@ const NavPublic = () => {
   );
 };
 
-const Navbar = ({ admin, handleLogout }) => {
+const Navbar = ({ admin, handleLogout, ipCountry }) => {
   return (
     <header className="header">
       <div className="header__container">
         {useDesktop(1024) && <Logo />}
         <div className="navbar">
-          {admin ? <NavAdmin handleLogout={handleLogout} /> : <NavPublic />}
+          {admin ? (
+            <NavAdmin handleLogout={handleLogout} />
+          ) : (
+            <NavPublic ipCountry={ipCountry} />
+          )}
         </div>
       </div>
     </header>

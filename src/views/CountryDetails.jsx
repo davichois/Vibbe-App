@@ -10,8 +10,9 @@ import iconToxico from "../assets/images/toxico.svg";
 import Loader from "../components/Loader";
 
 import "../sass/pages/CountryDetails.scss";
+import LoaderContainer from "../components/LoaderContainer";
 
-const CountryDetails = ({ match }) => {
+const CountryDetails = ({ ipCountry }) => {
   const [loader, setLoader] = useState(false);
   const [detailsCountry, setDetailsCountry] = useState({
     countryInfo: {},
@@ -20,11 +21,11 @@ const CountryDetails = ({ match }) => {
 
   const API = `https://corona.lmao.ninja/v2/countries/`;
   const APIUBICACIONES = "https://vibbeapi.herokuapp.com/api/covid19";
-  const ID_API = match.params.countryId;
+  // const ID_API = match.params.countryId;
 
   const fetchData = async () => {
     try {
-      const { data } = await Axios.get(`${API}${ID_API}?yesterday=true`);
+      const { data } = await Axios.get(`${API}${ipCountry}?yesterday=true`);
       setDetailsCountry(data);
     } catch (error) {
       console.log(error);
@@ -46,7 +47,15 @@ const CountryDetails = ({ match }) => {
   useEffect(() => {
     fetchData();
     fetchUbicaciones();
-  }, []);
+  }, [ipCountry]);
+
+  if (ipCountry === null) {
+    return (
+      <LoaderContainer>
+        <Loader />
+      </LoaderContainer>
+    );
+  }
 
   return (
     <>

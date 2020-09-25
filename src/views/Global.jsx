@@ -16,6 +16,14 @@ const Global = () => {
 
   const API = `https://corona.lmao.ninja/v2/all?yesterday`;
 
+  // Chart.scaleService.updateScaleDefaults("linear", {
+  //   ticks: {
+  //     // min: 0,
+  //     beginAtZero: true,
+  //     suggestedMax: 3,
+  //   },
+  // });
+
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -29,9 +37,18 @@ const Global = () => {
     }
   };
 
+  const datoEnEspanish = () => {
+    console.log(
+      new Intl.DateTimeFormat("es-MX", {
+        month: "short",
+        day: "numeric",
+      }).format(new Date("09-19"))
+    );
+  };
+
   useEffect(() => {
     fetchData();
-    // return console.clear();
+    datoEnEspanish();
   }, []);
 
   if (error) {
