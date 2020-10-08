@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import desfactor from "../helpers/desfactor";
+import GoogleMaps from "simple-react-google-maps";
 
 import Slogan from "../components/Slogan";
 import InfoResume from "../components/Details/InfoResume";
-import InfoSection from "../components/Details/InfoSection";
 import imgSlogan from "../assets/images/virus.png";
 import CodeError from "../components/CodeError";
 import Loader from "../components/Loader";
@@ -15,14 +14,6 @@ const Global = () => {
   const [loading, setLoading] = useState(false);
 
   const API = `https://corona.lmao.ninja/v2/all?yesterday`;
-
-  // Chart.scaleService.updateScaleDefaults("linear", {
-  //   ticks: {
-  //     // min: 0,
-  //     beginAtZero: true,
-  //     suggestedMax: 3,
-  //   },
-  // });
 
   const fetchData = async () => {
     setLoading(true);
@@ -67,9 +58,14 @@ const Global = () => {
       ) : (
         <>
           <InfoResume {...global} />
-          <InfoSection
-            todayDeaths={desfactor(global.todayDeaths || 0)}
-            todayCases={desfactor(global.todayCases || 0)}
+          <GoogleMaps
+            apiKey={"AIzaSyByxQoPRPSATulJClOd2o2CrBqYNbKUgEc"}
+            style={{ height: "290px", width: "100%" }}
+            zoom={1.3}
+            center={{
+              lat: 15,
+              lng: 10,
+            }}
           />
         </>
       )}

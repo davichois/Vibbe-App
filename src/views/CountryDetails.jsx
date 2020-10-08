@@ -11,18 +11,22 @@ import Loader from "../components/Loader";
 
 import "../sass/pages/CountryDetails.scss";
 import LoaderContainer from "../components/LoaderContainer";
+import Search from "../components/Search";
 
 const CountryDetails = ({ ipCountry }) => {
-  const [loader, setLoader] = useState(false);
   const [detailsCountry, setDetailsCountry] = useState({
     countryInfo: {},
   });
-  const [apiUbicaciones, setApiUbicaciones] = useState([]);
+  const [loaderRegionCases, setLoaderRegionCases] = useState(false);
+  const [dataRegionCases, setDataRegionCases] = useState(null);
+  const [valueSearch, setValueSearch] = useState("");
 
   const API = `https://corona.lmao.ninja/v2/countries/`;
-  const APIUBICACIONES = "https://vibbeapi.herokuapp.com/api/covid19";
-  // const ID_API = match.params.countryId;
+  let apiKey = "a56b5b3f-9808-44ad-ba5d-fc8b90aa4225";
 
+  // const APIUBICACIONES = "https://vibbeapi.herokuapp.com/api/covid19";
+
+  // obteniendo datos generales
   const fetchData = async () => {
     try {
       const { data } = await Axios.get(`${API}${ipCountry}?yesterday=true`);
@@ -32,21 +36,37 @@ const CountryDetails = ({ ipCountry }) => {
     }
   };
 
-  const fetchUbicaciones = async () => {
-    setLoader(true);
+  // obteniendo datos por region
+  const fetchRegionalCases = async () => {
+    setLoaderRegionCases(true);
     try {
-      const { data } = await Axios.get(APIUBICACIONES);
-      setApiUbicaciones(data.message);
-      setLoader(false);
+      const config = {
+        headers: {
+          "X-Authorization": apiKey,
+        },
+      };
+      const { data: dataRegion } = await Axios.get(
+        `https://www.cyberpurge.com/api/covid/regionalDataByCountry/${ipCountry}`,
+        config
+      );
+      setDataRegionCases(dataRegion.data);
+      setLoaderRegionCases(false);
     } catch (error) {
-      console.log(error);
-      setLoader(false);
+      console.error(error);
+      setLoaderRegionCases(false);
     }
   };
 
+  const handleChangeSearch = (e) => {
+    setValueSearch(e.target.value);
+  };
+
+  // efectos
   useEffect(() => {
-    fetchData();
-    fetchUbicaciones();
+    if (ipCountry != null) {
+      fetchData();
+      fetchRegionalCases();
+    }
   }, [ipCountry]);
 
   if (ipCountry === null) {
@@ -59,61 +79,70 @@ const CountryDetails = ({ ipCountry }) => {
 
   return (
     <>
+      <Search onChange={handleChangeSearch} value={valueSearch} />
+
       <TitleCountry
         nameCountry={detailsCountry.country}
         avatar={detailsCountry.countryInfo.flag}
       />
       <InfoResume {...detailsCountry} />
-      <InfoSection
-        todayDeaths={desfactor(detailsCountry.todayDeaths || 0)}
-        todayCases={desfactor(detailsCountry.todayCases || 0)}
-      />
-      {detailsCountry.country === "Peru" && (
-        <>
-          {loader ? (
-            <div>
-              <Loader />
-            </div>
-          ) : (
-            <section className="stat-table style-box">
-              <Title
-                title="Casos"
-                subtitle="Departamentales"
-                img={iconToxico}
-              />
-              <table className="stat-table__content">
-                <thead className="th_list">
-                  <tr>
-                    <th className="th_item">Ubicación</th>
-                    <th className="th_item tb-right">Confirmados</th>
-                    <th className="th_item tb-right">Muertes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {apiUbicaciones.map((item) => (
-                    <tr className="tb_list" key={item._id}>
-                      <td className="tb_item">
-                        <div>
-                          <img src={item.banderaUrl} alt={item.departamento} />
-                          <span>{item.departamento}</span>
-                        </div>
-                      </td>
-                      <td className="tb_item tb-right">
-                        {desfactor(item.confirmados || 0)}
-                      </td>
-                      <td className="tb_item tb-right">
-                        {desfactor(item.muertes || 0)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          )}
-        </>
-      )}
+      <InfoSection ipCountry={ipCountry} apiKey={apiKey} />
+      <>
+        {loaderRegionCases ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <section className="stat-table style-box">
+            <Title title="Casos" subtitle="Regionales" img={iconToxico} />
+            {dataRegionCases != null &&
+              (dataRegionCases.length === 0 ? (
+                <h1 style={{ textAlign: "center" }}>No hay Datos</h1>
+              ) : (
+                <TableRegionCases dataRegionCases={dataRegionCases} />
+              ))}
+          </section>
+        )}
+      </>
     </>
   );
 };
 
 export default CountryDetails;
+
+function TableRegionCases({ dataRegionCases }) {
+  return (
+    <table className="stat-table">
+      <thead className="th_list">
+        <tr>
+          <th className="th_item">Ubicación</th>
+          <th className="th_item tb-right">Confirmados</th>
+          <th className="th_item tb-right">Muertes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dataRegionCases.map((region) => (
+          <tr className="tb_list" key={region.regionName}>
+            <td className="tb_item">
+              <div>
+                <img
+                  src={`https:${region.regionFlagUrl}`}
+                  alt={region.regionName}
+                />
+                <span>{region.regionName}</span>
+              </div>
+            </td>
+            <td className="tb_item tb-right">
+              {region.casesCount === 0 ? "-" : desfactor(region.casesCount)}
+            </td>
+            <td className="tb_item tb-right">
+              {region.recoveredCount === 0
+                ? "-"
+                : desfactor(region.recoveredCount || 0)}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

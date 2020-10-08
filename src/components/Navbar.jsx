@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import useDesktop from "../hooks/useDesktop";
 
@@ -43,7 +43,7 @@ const NavAdmin = ({ handleLogout }) => {
   );
 };
 
-const NavPublic = ({ ipCountry }) => {
+const NavPublic = () => {
   return (
     <>
       <NavLink exact to="/" activeClassName="w-active" className="navbar__item">
@@ -52,7 +52,7 @@ const NavPublic = ({ ipCountry }) => {
       </NavLink>
       <NavLink
         exact
-        to={`/countries/${ipCountry}`}
+        to={`/country`}
         activeClassName="w-active"
         className="navbar__item"
       >
@@ -81,17 +81,13 @@ const NavPublic = ({ ipCountry }) => {
   );
 };
 
-const Navbar = ({ admin, handleLogout, ipCountry }) => {
+const Navbar = ({ admin, handleLogout }) => {
   return (
     <header className="header">
       <div className="header__container">
         {useDesktop(1024) && <Logo />}
         <div className="navbar">
-          {admin ? (
-            <NavAdmin handleLogout={handleLogout} />
-          ) : (
-            <NavPublic ipCountry={ipCountry} />
-          )}
+          {admin ? <NavAdmin handleLogout={handleLogout} /> : <NavPublic />}
         </div>
       </div>
     </header>

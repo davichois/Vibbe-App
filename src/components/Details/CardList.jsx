@@ -8,21 +8,25 @@ const CardList = ({ critical, active, deaths, recovered }) => {
       totalName: "Casos Criticos",
       numero: critical,
       typeCase: "cases",
+      iconCases: "icon-critico",
     },
     {
       totalName: "Total de activos",
       numero: active,
       typeCase: "active",
+      iconCases: "icon-mascarilla-medica card--medium-img",
     },
     {
       totalName: "Total de muertes",
       numero: deaths,
       typeCase: "deaths",
+      iconCases: "icon-lapida",
     },
     {
       totalName: "Total de recuperados",
       numero: recovered,
       typeCase: "recovered",
+      iconCases: "icon-team ",
     },
   ];
 
@@ -34,6 +38,7 @@ const CardList = ({ critical, active, deaths, recovered }) => {
           totalName={item.totalName}
           numCases={item.numero}
           colorCases={item.typeCase}
+          iconCases={item.iconCases}
         />
       ))}
     </div>

@@ -22,7 +22,11 @@
   &__img {
     grid-area: info-img;
     padding-top: 3px;
+    font-size: 20px;
     color: var(--color-third);
+  }
+  &--medium-img {
+    font-size: 22px;
   }
   &__count {
     grid-area: info-count;
@@ -44,26 +48,28 @@
 @media screen and (min-width: 768px) {
   .card {
     padding: 2px 20px;
-  }
+    &__title {
+      font-size: 18px;
+      color: var(--color-third);
+      grid-area: info-title;
+      font-family: var(--font-subtitle2);
+      padding-bottom: 3px;
+    }
+    &__count {
+      p {
+        font-size: 21px;
+      }
+      span {
+        top: -3px;
+        font-size: 16px;
+      }
+    }
 
-  .icon-team:before {
-    font-size: 18px;
-  }
-
-  .card__title {
-    font-size: 18px;
-    color: var(--color-third);
-    grid-area: info-title;
-    font-family: var(--font-subtitle2);
-    padding-bottom: 3px;
-  }
-
-  .card__count p {
-    font-size: 21px;
-  }
-
-  .card__count span {
-    top: -3px;
-    font-size: 16px;
+    &__img {
+      font-size: 25px;
+    }
+    &--medium-img {
+      font-size: 27px;
+    }
   }
 }

@@ -2,7 +2,8 @@ import React from "react";
 import desfactor from "../../helpers/desfactor";
 
 import CardList from "./CardList";
-import Progress from "../../assets/images/crecimiento.png";
+// import Progress from "../../assets/images/crecimiento.png";
+import Progress from "../../assets/images/coronavirus.png";
 
 import Title from "../Title";
 

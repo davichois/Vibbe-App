@@ -26,21 +26,129 @@
       margin-left: 0.5em;
     }
   }
-  &__details {
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 50% 50%;
-    margin-top: 0.6em;
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0 0.8em;
+
+    .select-vibbe {
+      width: 105px;
+      position: relative;
+      font-family: var(--font-subtitle2);
+      box-sizing: border-box;
+
+      &__btn {
+        font-size: 15px;
+        color: var(--color-third);
+        padding: 0 6px;
+        user-select: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 8px;
+          right: 6px;
+          border: 4px solid transparent;
+          border-color: var(--color-third) transparent transparent transparent;
+        }
+      }
+
+      &__option {
+        width: 105px;
+        position: absolute;
+        top: 100%;
+        z-index: 7;
+        background-color: white;
+        color: var(--color-third);
+
+        font-family: var(--font-subtitle2);
+        font-size: 14px;
+        list-style: none;
+
+        li {
+          padding: 6px;
+          border: 1px solid;
+          border-color: transparent var(--color-dark-active)
+            var(--color-dark-active) var(--color-dark-active);
+        }
+      }
+    }
+
+    .date-history {
+      color: var(--color-third);
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      p {
+        padding: 0 6px 0 3px;
+        font-family: var(--font-subtitle2);
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__graphic {
+    display: flex;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px 0;
+    margin-bottom: 0.3em;
+  }
+  .voltear-icon::after {
+    top: 3px;
+    border-color: transparent transparent var(--color-third) transparent;
   }
 }
 
-@media screen and (min-width: 768px) {
-  .infoSection__title h2 {
-    font-size: 20px;
-    padding-left: 0.4em;
-  }
+.graphic-loader {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 4;
+  left: 0;
+  top: 0;
+}
 
-  .infoSection__title span {
-    font-size: 12px;
+@media screen and (min-width: 768px) {
+  .infoSection {
+    &__title {
+      h2 {
+        font-size: 20px;
+        padding-left: 0.4em;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
+    &__options {
+      .select-vibbe {
+        &__btn {
+          font-size: 1em;
+          cursor: pointer;
+          &::after {
+            top: 8px;
+            right: 5px;
+          }
+        }
+        &__option {
+          li {
+            padding: 4px;
+          }
+        }
+      }
+      .date-history {
+        font-size: 14px;
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+    .voltear-icon::after {
+      top: 3px;
+      border-color: transparent transparent var(--color-third) transparent;
+    }
   }
 }

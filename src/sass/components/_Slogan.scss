@@ -33,9 +33,9 @@
 @media screen and (min-width: 768px) {
   .Slogan {
     height: 290px;
-  }
-
-  .Slogan__title {
-    font-size: 24px;
+    margin-bottom: 0.7em;
+    &__title {
+      font-size: 24px;
+    }
   }
 }

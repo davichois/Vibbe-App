@@ -10,7 +10,7 @@ import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import About from "./views/About";
 import Global from "./views/Global";
-import Countries from "./views/Countries";
+// import Countries from "./views/Countries";
 import Login from "./views/Login";
 const Health = lazy(() => import("./views/Health"));
 const Development = lazy(() => import("./views/Development"));
@@ -75,7 +75,7 @@ const RoutesPublic = ({ ipCountry, clickCount, actAdmin, loginAdmin }) => (
         <Route exact path="/development" component={Development} />
         <Route
           exact
-          path="/countries/:countryId"
+          path="/country"
           render={(props) => (
             <CountryDetails {...props} ipCountry={ipCountry} />
           )}
@@ -95,7 +95,7 @@ const Routes = () => {
   const [admin, setAdmin] = useState(null);
   const [cargandoAdmin, setCargandoAdmin] = useState(true);
   const [actAdmin, setActAdmin] = useState(false);
-  const [ipCountry, setIpCountry] = useState("PE");
+  const [ipCountry, setIpCountry] = useState(null);
 
   // activacion del btn login
   let numClick = 0;
@@ -137,15 +137,15 @@ const Routes = () => {
     }
   };
 
+  // opteniendo nombre del pais del usuario
   useEffect(() => {
     async function fetchIP() {
       const { data } = await Axios.get("http://localhost:3000/geo");
-      console.log(data["info De Geo"].country);
       setIpCountry(data["info De Geo"].country);
     }
 
     fetchIP();
-  }, []);
+  }, [ipCountry]);
 
   useEffect(() => {
     if (!getToken()) {
@@ -182,11 +182,7 @@ const Routes = () => {
             ipCountry={ipCountry}
           />
         )}
-        <Navbar
-          admin={admin}
-          handleLogout={handleLogout}
-          ipCountry={ipCountry}
-        />
+        <Navbar admin={admin} handleLogout={handleLogout} />
       </>
     </Router>
   );
